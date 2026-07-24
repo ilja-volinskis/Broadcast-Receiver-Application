@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Broadcast Receiver Application</string>
+    <string name="please_grant_the_sms_permission">Please grant the sms permission</string>
+    <string name="sms">Sms</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="listening_for_incoming_sms">Listening for incoming SMS</string>
 </resources>
