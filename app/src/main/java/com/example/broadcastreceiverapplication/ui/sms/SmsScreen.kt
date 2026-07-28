@@ -40,6 +40,8 @@ fun SmsScreen(
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(12.dp))
+
+        MessagesContent(messages)
     }
 }
 
