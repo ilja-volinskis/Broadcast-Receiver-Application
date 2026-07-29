@@ -2,14 +2,13 @@ package com.example.broadcastreceiverapplication.ui.sms
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,62 +29,17 @@ fun SmsScreen(
 ) {
     val messages by viewModel.messages.collectAsStateWithLifecycle()
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.listening_for_incoming_sms),
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(modifier = Modifier.height(12.dp))
+    Scaffold {
+        innerPadding ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
 
-        MessagesContent(messages)
-    }
-}
-
-@Composable
-fun MessagesContent(
-    messages: List<SmsData>,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        if (messages.isEmpty()) {
-            Text(stringResource(R.string.no_messages_received_yet))
-        } else {
-            LazyColumn {
-                items(messages.reversed()) {
-                    SmsItem(it)
-                    HorizontalDivider()
-                }
-            }
+            PartitionContent(messages)
         }
     }
 }
 
-@Composable
-fun SmsItem(
-    message: SmsData,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .padding(8.dp)
-    ) {
-        Text(
-            text = message.sender,
-            style = MaterialTheme.typography.titleSmall
-        )
-        Text(
-            text = message.body,
-            style = MaterialTheme.typography.bodyMedium
-        )
-        Text(
-            text = DateFormat.getDateTimeInstance().format(Date(message.timestamp)),
-            style = MaterialTheme.typography.labelSmall
-        )
-    }
-}
+

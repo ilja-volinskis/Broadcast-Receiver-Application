@@ -13,6 +13,8 @@ lifecycleViewmodelCompose = "2.11.0"
 ksp = "2.3.7"
 hilt = "2.60.1"
 hiltLifecycleViewmodelCompose = "1.4.0"
+animationCoreVersion = "1.11.4"
+graphicsShapesVersion = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +37,8 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistVersion" }
+androidx-compose-animation-core = { group = "androidx.compose.animation", name = "animation-core", version.ref = "animationCoreVersion" }
+androidx-graphics-shapes = { group = "androidx.graphics", name = "graphics-shapes", version.ref = "graphicsShapesVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

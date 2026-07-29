@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SmsViewModel @Inject constructor(
-    val repository: SmsRepository
+    private val repository: SmsRepository
 ) : ViewModel() {
 
     val messages: StateFlow<List<SmsData>> = repository.messages
