@@ -1,5 +1,8 @@
 package com.example.broadcastreceiverapplication.ui.sms
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.EaseInOutSine
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -7,32 +10,43 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.foundation.text.TextAutoSizeDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.broadcastreceiverapplication.data.SmsData
 import kotlin.random.Random
 
 
 @Composable
 fun SenderElement(
-    name: String,
+    sender: String,
+    onClick: () -> Unit,
+    sharedScope: SharedTransitionScope,
+    animatedScope: AnimatedContentScope,
     modifier: Modifier = Modifier
 ) {
-    val color = remember(name) { randomGoodColor() }
+    val color = remember(sender) { randomGoodColor(sender.hashCode()) }
 
-    val delayOffset = remember(name) { Random.nextInt(10000) }
+    val delayOffset = remember(sender) { Random.nextInt(10000) }
 
     val infiniteTransition = rememberInfiniteTransition(label = "blobAnimation")
 
@@ -66,25 +80,82 @@ fun SenderElement(
         label = "rotation"
     )
 
-    Box(
-        modifier = modifier
-            .padding(8.dp)
-            .offset(y = offsetYFloat.dp)
-            .scale(scale)
-            .rotate(rotation)
-            .background(color, shape = RoundedCornerShape(20))
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = name)
+    val shape = RoundedCornerShape(20)
+    with(sharedScope) {
+        Box(
+            modifier = modifier
+                .padding(8.dp)
+                .offset(y = offsetYFloat.dp)
+                .scale(scale)
+                .rotate(rotation)
+                .sharedBounds(
+                    sharedContentState = rememberSharedContentState(key = sender),
+                    animatedVisibilityScope = animatedScope,
+                    resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds
+                )
+//                .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
+                .clip(shape)
+                .background(color, shape)
+                .fillMaxSize()
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center
+        ) {
+            val textColor = MaterialTheme.colorScheme.onBackground
+            BasicText(
+                text = sender,
+                autoSize = TextAutoSize.StepBased(minFontSize = 6.sp, maxFontSize = 24.sp),
+                maxLines = 1,
+                color = { textColor },
+                modifier = Modifier.padding(horizontal = 4.dp)
+            )
+
+        }
+    }
+}
+
+@Composable
+fun SenderMessages(
+    sender: String,
+    messages: List<SmsData>,
+    onBack: () -> Unit,
+    sharedScope: SharedTransitionScope,
+    animatedScope: AnimatedContentScope,
+    modifier: Modifier = Modifier
+) {
+    BackHandler {
+        onBack()
+    }
+
+    val color = remember(sender) { randomGoodColor(sender.hashCode()) }
+
+    val shape = RoundedCornerShape(20)
+    with(sharedScope) {
+        Box(
+            modifier = modifier
+                .padding(8.dp)
+                .fillMaxSize()
+                .sharedBounds(
+                    sharedContentState = rememberSharedContentState(key = sender),
+                    animatedVisibilityScope = animatedScope,
+                    resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds
+                )
+//                .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
+                .clip(shape)
+                .background(color, shape)
+                .clickable(onClick = onBack),
+            contentAlignment = Alignment.Center
+        ) {
+            MessagesContent(sender, messages)
+        }
     }
 }
 
 // Generate acceptable color for dark background and white text
-fun randomGoodColor(): Color {
-    var red: Float = Random.nextFloat()
-    var green: Float = Random.nextFloat()
-    val blue: Float = Random.nextFloat()
+fun randomGoodColor(seed: Int): Color {
+    val rnd = Random(seed)
+    var red: Float = rnd.nextFloat()
+    var green: Float = rnd.nextFloat()
+    val blue: Float = rnd.nextFloat()
 
     // Lower influence of green and red to exclude bright yellows and such
     val factor = 1F - red * green
@@ -93,22 +164,3 @@ fun randomGoodColor(): Color {
 
     return Color(red, green, blue)
 }
-
-//@Composable
-//fun SenderElement(
-//    name: String,
-//    modifier: Modifier = Modifier
-//) {
-//    val color = remember(name) {
-//        Color(Random.nextInt(256), Random.nextInt(256), Random.nextInt(256))
-//    }
-//    Box(
-//        modifier = modifier
-//            .padding(16.dp)
-//            .background(color)
-//            .fillMaxSize(),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Text(text = name)
-//    }
-//}

@@ -10,6 +10,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,19 +22,33 @@ import java.util.Date
 
 @Composable
 fun MessagesContent(
+    sender: String,
     messages: List<SmsData>,
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .padding(vertical = 16.dp)
     ) {
         if (messages.isEmpty()) {
             Text(stringResource(R.string.no_messages_received_yet))
         } else {
-            LazyColumn {
-                items(messages.reversed()) {
-                    SmsItem(it)
-                    HorizontalDivider()
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = sender
+                )
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    items(messages.reversed()) {
+                        SmsItem(it)
+                        HorizontalDivider()
+                    }
                 }
             }
         }
@@ -49,17 +64,17 @@ fun SmsItem(
         modifier = modifier
             .padding(8.dp)
     ) {
-        Text(
-            text = message.sender,
-            style = MaterialTheme.typography.titleSmall
-        )
+//        Text(
+//            text = message.sender,
+//            style = MaterialTheme.typography.titleSmall
+//        )
         Text(
             text = message.body,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.titleSmall // bodyMedium
         )
         Text(
             text = DateFormat.getDateTimeInstance().format(Date(message.timestamp)),
-            style = MaterialTheme.typography.labelSmall
+            style = MaterialTheme.typography.bodyMedium // labelSmall
         )
     }
 }
