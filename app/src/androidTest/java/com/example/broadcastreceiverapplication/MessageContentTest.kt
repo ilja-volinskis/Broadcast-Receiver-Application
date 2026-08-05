@@ -2,7 +2,7 @@ package com.example.broadcastreceiverapplication
 
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import com.example.broadcastreceiverapplication.data.SmsData
 import com.example.broadcastreceiverapplication.ui.sms.MessagesContent
