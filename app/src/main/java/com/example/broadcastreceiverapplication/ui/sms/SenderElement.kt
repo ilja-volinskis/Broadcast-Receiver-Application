@@ -93,7 +93,6 @@ fun SenderElement(
                     animatedVisibilityScope = animatedScope,
                     resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds
                 )
-//                .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
                 .clip(shape)
                 .background(color, shape)
                 .fillMaxSize()
@@ -139,7 +138,6 @@ fun SenderMessages(
                     animatedVisibilityScope = animatedScope,
                     resizeMode = SharedTransitionScope.ResizeMode.RemeasureToBounds
                 )
-//                .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
                 .clip(shape)
                 .background(color, shape)
                 .clickable(onClick = onBack),

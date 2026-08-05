@@ -13,8 +13,7 @@ interface SmsRepository {
 @Singleton
 class SmsRepositoryImpl @Inject constructor() : SmsRepository {
 
-//    private val _messages = MutableStateFlow<List<SmsData>>(emptyList())
-    private val _messages = MutableStateFlow<List<SmsData>>(FakeData.sms)
+    private val _messages = MutableStateFlow<List<SmsData>>(emptyList())
     override val messages: StateFlow<List<SmsData>> = _messages
 
     override fun addMessage(sms: SmsData) {
