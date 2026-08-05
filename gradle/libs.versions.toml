@@ -15,8 +15,12 @@ hilt = "2.60.1"
 hiltLifecycleViewmodelCompose = "1.4.0"
 animationCoreVersion = "1.11.4"
 graphicsShapesVersion = "1.1.0"
+rulesVersion = "1.7.0"
+kotlinxCoroutinesTestVersion = "1.11.0"
 
 [libraries]
+androidx-rules = { module = "androidx.test:rules", version.ref = "rulesVersion" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTestVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
