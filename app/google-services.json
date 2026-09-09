@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "475110042531",
+    "firebase_url": "https://broadcast-receiver-application-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "broadcast-receiver-application",
+    "storage_bucket": "broadcast-receiver-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475110042531:android:55ae0e6e8b61c638188816",
+        "android_client_info": {
+          "package_name": "com.example.broadcastreceiverapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4r-eShb0GKML7XXQ1Rjr35E1aZkKJIdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
