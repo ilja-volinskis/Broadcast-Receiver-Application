@@ -17,6 +17,13 @@ animationCoreVersion = "1.11.4"
 graphicsShapesVersion = "1.1.0"
 rulesVersion = "1.7.0"
 kotlinxCoroutinesTestVersion = "1.11.0"
+googleServices = "4.5.0"
+crashlyticsPlugin = "3.0.8"
+firebaseAnalyticsKtx = "22.5.0"
+firebaseBom = "34.18.0"
+firebaseCrashlyticsKtx = "19.4.4"
+firebaseDatabaseKtx = "21.0.0"
+firebaseAuthKtx = "21.0.0"
 
 [libraries]
 androidx-rules = { module = "androidx.test:rules", version.ref = "rulesVersion" }
@@ -43,10 +50,17 @@ androidx-compose-material-icons-extended = { module = "androidx.compose.material
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistVersion" }
 androidx-compose-animation-core = { group = "androidx.compose.animation", name = "animation-core", version.ref = "animationCoreVersion" }
 androidx-graphics-shapes = { group = "androidx.graphics", name = "graphics-shapes", version.ref = "graphicsShapesVersion" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebaseAnalyticsKtx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebaseCrashlyticsKtx" }
+firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlyticsPlugin" }
 
